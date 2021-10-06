@@ -32,7 +32,7 @@ def transform_record(old_dict):
     new_dict = {}
     no_id_dict = omit_id(old_dict)
     for key in no_id_dict:
-        if key is "recordId":
+        if key == "recordId":
             new_dict["_id"] = no_id_dict[key]
         else:
             new_dict[key] = no_id_dict[key]
@@ -43,7 +43,7 @@ def transform_representatives(old_dict):
     new_dict = {}
     no_id_dict = omit_id(old_dict)
     for key in no_id_dict:
-        if key is "organizationId":
+        if key == "organizationId":
             new_dict["_id"] = no_id_dict[key]
         else:
             new_dict[key] = no_id_dict[key]
@@ -59,7 +59,7 @@ def omit_id(old_dict):
 
 
 records_file = args.outputdirectory + "mongo_records.json"
-organizations_file = "mongo_organizations.json"
+organizations_file = args.outputdirectory + "mongo_organizations.json"
 output_records = args.outputdirectory + "transformed_records.json"
 output_representatives = args.outputdirectory + "transformed_representatives.json"
 
