@@ -13,6 +13,7 @@ def transform_records(r_file):
     print("Total number of extracted records: " + str(len(records)))
     for record_id in records:
         transformed_records[record_id] = transform_record(records[record_id])
+    return transformed_records
 
 
 def transform_organizations(o_file):
@@ -21,6 +22,7 @@ def transform_organizations(o_file):
     print("Total number of extracted organizations: " + str(len(organizations)))
     for org_id in organizations:
         transformed_representatives[org_id] = transform_representatives(organizations[org_id])
+    return transformed_representatives
 
 
 def openfile(file_name):
