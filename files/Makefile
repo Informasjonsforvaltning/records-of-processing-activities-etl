@@ -2,16 +2,16 @@
 all: extract transform load
 
 extract:
-	echo "Extracting datasets...."
-	python3 ./extract_datasets.py -o ./tmp/
+	echo "Extracting records & organizations...."
+	python3 ./extract.py -o ./tmp/
 
 transform:
-	echo "Transforming datasets...."
-	python3 ./transform_datasets.py -o ./tmp/
+	echo "Transforming records & organizations(-> representatives)...."
+	python3 ./transform.py -o ./tmp/
 
 load:
-	echo "Loading datasets...."
-	python3 ./load_datasets.py -o ./tmp/
+	echo "Loading records & representatives...."
+	python3 ./load.py -o ./tmp/
 
 clean:
 	rm ./tmp/*.json
