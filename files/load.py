@@ -21,7 +21,7 @@ with open(args.outputdirectory + 'transformed_records.json') as records_file:
     for mongo_id in transformed_json:
         to_be_updated = transformed_json[mongo_id]
         print("Updating ID: " + mongo_id)
-        insert_result = db.records.find_one_and_update({'_id': mongo_id},  {'$set': to_be_updated}, {'upsert': 'true'})
+        insert_result = db.records.insertOne(to_be_updated)
         if insert_result:
             total_updated += 1
             print("Successfully updated: " + mongo_id)
@@ -45,7 +45,7 @@ with open(args.outputdirectory + 'transformed_representatives.json') as represen
     for mongo_id in transformed_json:
         to_be_updated = transformed_json[mongo_id]
         print("Updating ID: " + mongo_id)
-        insert_result = db.representatives.find_one_and_update({'_id': mongo_id},  {'$set': to_be_updated}, {'upsert': 'true'})
+        insert_result = db.representatives.insertOne(to_be_updated)
         if insert_result:
             total_updated += 1
             print("Successfully updated: " + mongo_id)
