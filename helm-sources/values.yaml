@@ -1,0 +1,7 @@
+# Default values for records-of-processing-activities-etl.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+##dataset-catalog-etl
+RECORDS_ETL_MEMORY: "1000Mi"
+RECORDS_ETL_IMAGE: eu.gcr.io/digdir-fdk-infra/records-of-processing-activities-etl:latest
