@@ -15,7 +15,7 @@ db = connection['records-of-processing-activities']
 def omit_id(old_dict):
     new_dict = {}
     for key in old_dict:
-        if key is not "_id" or key is not "id":
+        if key != "_id" or key != "id":
             new_dict[key] = old_dict[key]
     return new_dict
 
