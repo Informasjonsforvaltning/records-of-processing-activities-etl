@@ -2,7 +2,7 @@ import json
 import os
 from pymongo import MongoClient
 import argparse
-from bson.jsonutil import dumps
+from bson.json_util import dumps
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-o', '--outputdirectory', help="the path to the directory of the output files", required=True)
@@ -26,7 +26,7 @@ with open(args.outputdirectory + 'mongo_records.json', 'w', encoding="utf-8") as
     outfile.write(records_json_str)
 
 # Organizations
-dict_list = list(dumps(db.organizations.find()))
+dict_list = list(db.organizations.find())
 organizations = {}
 for id_dict in dict_list:
     id_str = id_dict["organizationId"]

@@ -1,6 +1,5 @@
 import json
 import argparse
-import os
 
 
 parser = argparse.ArgumentParser()
@@ -31,20 +30,30 @@ def openfile(file_name):
 
 def transform_record(old_dict):
     new_dict = {}
-    for key in old_dict:
+    no_id_dict = omit_id(old_dict)
+    for key in no_id_dict:
         if key is "recordId":
-            new_dict["_id"] = old_dict[key]
+            new_dict["_id"] = no_id_dict[key]
         else:
-            new_dict[key] = old_dict[key]
+            new_dict[key] = no_id_dict[key]
     return new_dict
 
 
 def transform_representatives(old_dict):
     new_dict = {}
-    for key in old_dict:
+    no_id_dict = omit_id(old_dict)
+    for key in no_id_dict:
         if key is "organizationId":
-            new_dict["_id"] = old_dict[key]
+            new_dict["_id"] = no_id_dict[key]
         else:
+            new_dict[key] = no_id_dict[key]
+    return new_dict
+
+
+def omit_id(old_dict):
+    new_dict = {}
+    for key in old_dict:
+        if not (key == '_id' or key == 'id'):
             new_dict[key] = old_dict[key]
     return new_dict
 
