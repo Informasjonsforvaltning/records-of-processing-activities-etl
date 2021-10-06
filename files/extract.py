@@ -2,6 +2,7 @@ import json
 import os
 from pymongo import MongoClient
 import argparse
+from bson.jsonutil import dumps
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-o', '--outputdirectory', help="the path to the directory of the output files", required=True)
@@ -12,31 +13,23 @@ connection = MongoClient(
 db = connection['records-of-processing-activities']
 
 
-def omit_id(old_dict):
-    new_dict = {}
-    for key in old_dict:
-        if not (key == '_id' or key == 'id'):
-            new_dict[key] = old_dict[key]
-    return new_dict
-
-
 # Records
-dict_list = list(db.records.find())
+dict_list = list(dumps(db.records.find()))
 records = {}
 for id_dict in dict_list:
     id_str = id_dict["recordId"]
-    records[id_str] = omit_id(id_dict)
+    records[id_str] = id_dict
 print("Total number of extracted records: " + str(len(records)))
 
 with open(args.outputdirectory + 'mongo_records.json', 'w', encoding="utf-8") as outfile:
     json.dump(records, outfile, ensure_ascii=False, indent=4)
 
 # Organizations
-dict_list = list(db.organizations.find())
+dict_list = list(dumps(db.organizations.find()))
 organizations = {}
 for id_dict in dict_list:
     id_str = id_dict["organizationId"]
-    organizations[id_str] = omit_id(id_dict)
+    organizations[id_str] = id_dict
 print("Total number of extracted organizations: " + str(len(organizations)))
 
 
