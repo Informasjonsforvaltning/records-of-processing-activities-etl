@@ -14,7 +14,7 @@ db = connection['records-of-processing-activities']
 
 
 # Records
-dict_list = list(dumps(db.records.find()))
+dict_list = list(db.records.find())
 records = {}
 for id_dict in dict_list:
     id_str = id_dict["recordId"]
@@ -22,7 +22,8 @@ for id_dict in dict_list:
 print("Total number of extracted records: " + str(len(records)))
 
 with open(args.outputdirectory + 'mongo_records.json', 'w', encoding="utf-8") as outfile:
-    json.dump(records, outfile, ensure_ascii=False, indent=4)
+    records_json_str = dumps(records)
+    outfile.write(records_json_str)
 
 # Organizations
 dict_list = list(dumps(db.organizations.find()))
@@ -32,6 +33,6 @@ for id_dict in dict_list:
     organizations[id_str] = id_dict
 print("Total number of extracted organizations: " + str(len(organizations)))
 
-
 with open(args.outputdirectory + 'mongo_organizations.json', 'w', encoding="utf-8") as outfile:
-    json.dump(organizations, outfile, ensure_ascii=False, indent=4)
+    organizations_json_str = dumps(organizations)
+    outfile.write(organizations_json_str)
