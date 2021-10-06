@@ -32,20 +32,20 @@ def openfile(file_name):
 def transform_record(old_dict):
     new_dict = {}
     for key in old_dict:
-        if key is not "_id" or key is not "id" or key is not "recordId":
-            new_dict[key] = old_dict[key]
-        elif key is "recordId":
+        if key is "recordId":
             new_dict["_id"] = old_dict[key]
+        else:
+            new_dict[key] = old_dict[key]
     return new_dict
 
 
 def transform_representatives(old_dict):
     new_dict = {}
     for key in old_dict:
-        if key is not "_id" or key is not "id" or key is not "organizationId":
-            new_dict[key] = old_dict[key]
-        elif key is "organizationId":
+        if key is "organizationId":
             new_dict["_id"] = old_dict[key]
+        else:
+            new_dict[key] = old_dict[key]
     return new_dict
 
 

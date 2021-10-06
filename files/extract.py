@@ -11,12 +11,21 @@ connection = MongoClient(
 
 db = connection['records-of-processing-activities']
 
+
+def omit_id(old_dict):
+    new_dict = {}
+    for key in old_dict:
+        if key is not "_id" or key is not "id":
+            new_dict[key] = old_dict[key]
+    return new_dict
+
+
 # Records
 dict_list = list(db.records.find())
 records = {}
 for id_dict in dict_list:
     id_str = id_dict["recordId"]
-    records[id_str]= id_dict
+    records[id_str] = omit_id(id_dict)
 print("Total number of extracted records: " + str(len(records)))
 
 with open(args.outputdirectory + 'mongo_records.json', 'w', encoding="utf-8") as outfile:
@@ -27,8 +36,9 @@ dict_list = list(db.organizations.find())
 organizations = {}
 for id_dict in dict_list:
     id_str = id_dict["organizationId"]
-    organizations[id_str] = id_dict
+    organizations[id_str] = omit_id(id_dict)
 print("Total number of extracted organizations: " + str(len(organizations)))
+
 
 with open(args.outputdirectory + 'mongo_organizations.json', 'w', encoding="utf-8") as outfile:
     json.dump(organizations, outfile, ensure_ascii=False, indent=4)
