@@ -21,7 +21,7 @@ with open(args.outputdirectory + 'transformed_records.json') as records_file:
     for mongo_id in transformed_json:
         to_be_updated = transformed_json[mongo_id]
         print("Updating ID: " + mongo_id)
-        insert_result = db.records.insertOne(to_be_updated)
+        insert_result = db.records.insert_one(to_be_updated)
         if insert_result:
             total_updated += 1
             print("Successfully updated: " + mongo_id)
@@ -29,7 +29,6 @@ with open(args.outputdirectory + 'transformed_records.json') as records_file:
             total_failed += 1
             print("Update failed: " + mongo_id)
             fail_log[mongo_id] = mongo_id
-        total_updated += 1
     print("Total number of records updated: " + str(total_updated))
     print("Total number of record updates failed: " + str(total_failed))
     with open("load_errors.json", 'w', encoding="utf-8") as err_file:
@@ -45,7 +44,7 @@ with open(args.outputdirectory + 'transformed_representatives.json') as represen
     for mongo_id in transformed_json:
         to_be_updated = transformed_json[mongo_id]
         print("Updating ID: " + mongo_id)
-        insert_result = db.representatives.insertOne(to_be_updated)
+        insert_result = db.representatives.insert_one(to_be_updated)
         if insert_result:
             total_updated += 1
             print("Successfully updated: " + mongo_id)
@@ -53,7 +52,6 @@ with open(args.outputdirectory + 'transformed_representatives.json') as represen
             total_failed += 1
             print("Update failed: " + mongo_id)
             fail_log[mongo_id] = mongo_id
-        total_updated += 1
     print("Total number of representatives updated: " + str(total_updated))
     print("Total number of representative updates failed: " + str(total_failed))
     with open("load_errors.json", 'w', encoding="utf-8") as err_file:
