@@ -1,4 +1,4 @@
-name: Build and deploy to staging when pull request is created
+name: Build and deploy to staging on push to branch
 
 on:
   push:
