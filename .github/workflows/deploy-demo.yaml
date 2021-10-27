@@ -3,7 +3,7 @@ name: Build and deploy to demo on push to branch
 on:
   push:
     branches:
-      - chore/hos/new-records-etl
+      - no
 
 jobs:
   build-and-deploy:
