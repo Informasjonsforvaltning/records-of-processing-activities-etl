@@ -22,12 +22,12 @@ def openfile(file_name):
 
 
 def transform_record(old_dict):
-    new_dict = {"otherArticles": {"articleNine": {}, "articleTen": {}}}
-    for key in old_dict:
-        new_dict[key]["otherArticles"]["articleNine"] = {"checked": old_dict["otherArticles"]["articleNine"].get("checked"),
-                                                         "legalities": [{"referenceUrl": old_dict["otherArticles"]["articleNine"].get("referenceUrl")}]}
-        new_dict[key]["otherArticles"]["articleTen"] = {"checked": old_dict["otherArticles"]["articleTen"].get("checked"),
-                                                        "legalities": [{"referenceUrl": old_dict["otherArticles"]["articleTen"].get("referenceUrl")}]}
+    new_dict = {"otherArticles": {}}
+    if old_dict.get("otherArticles"):
+        new_dict["otherArticles"]["articleNine"] = {"checked": old_dict["otherArticles"]["articleNine"].get("checked"),
+                                                    "legalities": [{"referenceUrl": old_dict["otherArticles"]["articleNine"].get("referenceUrl")}]}
+        new_dict["otherArticles"]["articleTen"] = {"checked": old_dict["otherArticles"]["articleTen"].get("checked"),
+                                                   "legalities": [{"referenceUrl": old_dict["otherArticles"]["articleTen"].get("referenceUrl")}]}
     return new_dict
 
 
