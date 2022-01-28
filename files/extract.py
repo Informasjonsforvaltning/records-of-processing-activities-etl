@@ -1,4 +1,3 @@
-import json
 import os
 from pymongo import MongoClient
 import argparse
@@ -13,26 +12,17 @@ connection = MongoClient(
 db = connection['records-of-processing-activities']
 
 
-# Records
-dict_list = list(db.records.find())
+records_list = list(db.records.find())
 records = {}
-for id_dict in dict_list:
-    id_str = id_dict["recordId"]
-    records[id_str] = id_dict
+for id_dict in records_list:
+    _id = id_dict["_id"]
+    records[_id] = {}
+    records[_id]["articleNine"] = id_dict["articleNine"]
+    records[_id]["articleTen"] = id_dict["articleTen"]
+
 print("Total number of extracted records: " + str(len(records)))
 
 with open(args.outputdirectory + 'mongo_records.json', 'w', encoding="utf-8") as outfile:
     records_json_str = dumps(records)
     outfile.write(records_json_str)
 
-# Organizations
-dict_list = list(db.organizations.find())
-organizations = {}
-for id_dict in dict_list:
-    id_str = id_dict["organizationId"]
-    organizations[id_str] = id_dict
-print("Total number of extracted organizations: " + str(len(organizations)))
-
-with open(args.outputdirectory + 'mongo_organizations.json', 'w', encoding="utf-8") as outfile:
-    organizations_json_str = dumps(organizations)
-    outfile.write(organizations_json_str)
