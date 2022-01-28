@@ -15,7 +15,7 @@ db = connection['records-of-processing-activities']
 records_list = list(db.records.find())
 records = {}
 for id_dict in records_list:
-    _id = id_dict["_id"]
+    _id = id_dict["recordId"]
     records[_id] = {}
     records[_id]["otherArticles"] = id_dict["otherArticles"]
 
