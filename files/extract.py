@@ -17,8 +17,7 @@ records = {}
 for id_dict in records_list:
     _id = id_dict["_id"]
     records[_id] = {}
-    records[_id]["articleNine"] = id_dict["articleNine"]
-    records[_id]["articleTen"] = id_dict["articleTen"]
+    records[_id]["otherArticles"] = id_dict["otherArticles"]
 
 print("Total number of extracted records: " + str(len(records)))
 

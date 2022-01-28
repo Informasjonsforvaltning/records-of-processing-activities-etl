@@ -24,10 +24,10 @@ def openfile(file_name):
 def transform_record(old_dict):
     new_dict = {}
     for key in old_dict:
-        new_dict[key]["articleNine"] = {"checked": old_dict["articleNine"]["checked"],
-                                        "legalities": [{"referenceUrl": old_dict["articleNine"]["referenceUrl"]}]}
-        new_dict[key]["articleTen"] = {"checked": old_dict["articleTen"]["checked"],
-                                       "legalities": [{"referenceUrl": old_dict["articleTen"]["referenceUrl"]}]}
+        new_dict[key]["otherArticles"]["articleNine"] = {"checked": old_dict["articleNine"]["checked"],
+                                                         "legalities": [{"referenceUrl": old_dict["articleNine"]["referenceUrl"]}]}
+        new_dict[key]["otherArticles"]["articleTen"] = {"checked": old_dict["articleTen"]["checked"],
+                                                        "legalities": [{"referenceUrl": old_dict["articleTen"]["referenceUrl"]}]}
     return new_dict
 
 
