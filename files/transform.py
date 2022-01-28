@@ -22,7 +22,7 @@ def openfile(file_name):
 
 
 def transform_record(old_dict):
-    new_dict = {}
+    new_dict = {"otherArticles": {"articleNine": {}, "articleTen": {}}}
     for key in old_dict:
         new_dict[key]["otherArticles"]["articleNine"] = {"checked": old_dict["otherArticles"]["articleNine"]["checked"],
                                                          "legalities": [{"referenceUrl": old_dict["otherArticles"]["articleNine"]["referenceUrl"]}]}
