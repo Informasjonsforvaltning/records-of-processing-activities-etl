@@ -2,15 +2,15 @@
 all: extract transform load
 
 extract:
-	echo "Extracting records & organizations...."
+	echo "Extracting records...."
 	python3 ./extract.py -o ./tmp/
 
 transform:
-	echo "Transforming records & organizations(-> representatives)...."
+	echo "Transforming records...."
 	python3 ./transform.py -o ./tmp/
 
 load:
-	echo "Loading records & representatives...."
+	echo "Loading records...."
 	python3 ./load.py -o ./tmp/
 
 clean:
