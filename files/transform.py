@@ -24,7 +24,10 @@ def openfile(file_name):
 def transform_record(old_dict):
     new_dict = old_dict
     for key, value in old_dict.items():
-        if check_content(value) and old_dict["commonDataControllerContact"]["commonDataControllerChecked"] is not False:
+        checked = old_dict["commonDataControllerContact"].get("commonDataControllerChecked")
+        if checked and isinstance(checked, bool):
+            new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = checked
+        elif check_content(value):
             new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = True
         else:
             new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = None
@@ -35,11 +38,11 @@ def check_content(content):
     if isinstance(content, str) and len(content) > 0:
         return True
     elif isinstance(content, list):
-        for string in content:
-            if len(string) > 0:
-                return True
-    else:
-        return False
+        for obj in content:
+            for key in obj:
+                if obj.get(key) and len(obj.get(key)) > 0:
+                    return True
+    return False
 
 
 records_file = args.outputdirectory + "mongo_records.json"

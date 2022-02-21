@@ -15,7 +15,7 @@ db = connection['recordsDB']
 records_list = list(db.records.find())
 records = {}
 for id_dict in records_list:
-    _id = id_dict["recordId"]
+    _id = id_dict["_id"]
     records[_id] = {}
     records[_id]["commonDataControllerContact"] = id_dict["commonDataControllerContact"]
 
