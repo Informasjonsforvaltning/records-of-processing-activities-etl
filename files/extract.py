@@ -16,12 +16,12 @@ records_list = list(db.records.find())
 records = {}
 for id_dict in records_list:
     _id = id_dict["_id"]
-    records[_id] = {}
-    records[_id]["commonDataControllerContact"] = id_dict["commonDataControllerContact"]
+    if id_dict.get("commonDataControllerContact"):
+        records[_id] = {}
+        records[_id]["commonDataControllerContact"] = id_dict["commonDataControllerContact"]
 
 print("Total number of extracted records: " + str(len(records)))
 
 with open(args.outputdirectory + 'mongo_records.json', 'w', encoding="utf-8") as outfile:
     records_json_str = dumps(records)
     outfile.write(records_json_str)
-
