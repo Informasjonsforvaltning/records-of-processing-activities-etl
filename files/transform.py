@@ -33,9 +33,9 @@ def transform_record(old_dict):
 
 def get_checked_value(old_dict):
     checked = old_dict["commonDataControllerContact"].get("commonDataControllerChecked")
-    if checked and isinstance(checked, bool):
+    if isinstance(checked, bool):
         return checked
-    for key, value in old_dict.items():
+    for key, value in old_dict["commonDataControllerContact"].items():
         if check_content(value):
             return True
     return None
