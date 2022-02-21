@@ -22,13 +22,24 @@ def openfile(file_name):
 
 
 def transform_record(old_dict):
-    new_dict = {"otherArticles": {}}
-    if old_dict.get("otherArticles"):
-        new_dict["otherArticles"]["articleNine"] = {"checked": old_dict["otherArticles"]["articleNine"].get("checked"),
-                                                    "legalities": [{"referenceUrl": old_dict["otherArticles"]["articleNine"].get("referenceUrl")}]}
-        new_dict["otherArticles"]["articleTen"] = {"checked": old_dict["otherArticles"]["articleTen"].get("checked"),
-                                                   "legalities": [{"referenceUrl": old_dict["otherArticles"]["articleTen"].get("referenceUrl")}]}
+    new_dict = old_dict
+    for key, value in old_dict.items():
+        if check_content(value):
+            new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = True
+        else:
+            new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = None
     return new_dict
+
+
+def check_content(content):
+    if isinstance(content, str) and len(content) > 0:
+        return True
+    elif isinstance(content, list):
+        for string in content:
+            if len(string) > 0:
+                return True
+    else:
+        return False
 
 
 records_file = args.outputdirectory + "mongo_records.json"

@@ -7,9 +7,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-o', '--outputdirectory', help="the path to the directory of the output files", required=True)
 args = parser.parse_args()
 connection = MongoClient(
-    f"""mongodb://{os.environ['MONGO_USERNAME']}:{os.environ['MONGO_PASSWORD']}@mongodb:27017/records-of-processing-activities?authSource=admin&authMechanism=SCRAM-SHA-1""")
+    f"""mongodb://{os.environ['MONGO_USERNAME']}:{os.environ['MONGO_PASSWORD']}@mongodb:27017/recordsDB?authSource=admin&authMechanism=SCRAM-SHA-1""")
 
-db = connection['records-of-processing-activities']
+db = connection['recordsDB']
 
 
 records_list = list(db.records.find())
@@ -17,7 +17,7 @@ records = {}
 for id_dict in records_list:
     _id = id_dict["recordId"]
     records[_id] = {}
-    records[_id]["otherArticles"] = id_dict["otherArticles"]
+    records[_id]["commonDataControllerContact"] = id_dict["commonDataControllerContact"]
 
 print("Total number of extracted records: " + str(len(records)))
 

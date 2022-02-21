@@ -9,7 +9,7 @@ parser.add_argument('-o', '--outputdirectory', help="the path to the directory o
 args = parser.parse_args()
 connection = MongoClient(
     f"""mongodb://{os.environ['MONGO_USERNAME']}:{os.environ['MONGO_PASSWORD']}@mongodb:27017/recordsDB?authSource=admin&authMechanism=SCRAM-SHA-1""")
-db = connection.recordsDB
+db = connection['recordsDB']
 
 with open(args.outputdirectory + 'transformed_records.json') as records_file:
     records_file_str = records_file.read()
@@ -31,5 +31,5 @@ with open(args.outputdirectory + 'transformed_records.json') as records_file:
             fail_log[mongo_id] = mongo_id
     print("Total number of records updated: " + str(total_updated))
     print("Total number of record updates failed: " + str(total_failed))
-    with open("load_errors.json", 'w', encoding="utf-8") as err_file:
+    with open(args.outputdirectory + "load_errors.json", 'w', encoding="utf-8") as err_file:
         json.dump(fail_log, err_file, ensure_ascii=False, indent=4)
