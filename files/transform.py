@@ -24,7 +24,7 @@ def openfile(file_name):
 def transform_record(old_dict):
     new_dict = old_dict
     for key, value in old_dict.items():
-        if check_content(value):
+        if check_content(value) and old_dict["commonDataControllerContact"]["commonDataControllerChecked"] is not False:
             new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = True
         else:
             new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = None
