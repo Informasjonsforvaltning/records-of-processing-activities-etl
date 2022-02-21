@@ -23,7 +23,7 @@ def openfile(file_name):
 
 
 def transform_record(old_dict):
-    new_dict = {}
+    new_dict = {"commonDataControllerContact": {}}
     new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = get_checked_value(old_dict)
     new_dict["commonDataControllerContact"]["companies"] = old_dict["commonDataControllerContact"].get("companies")
     new_dict["commonDataControllerContact"]["distributionOfResponsibilities"] = old_dict["commonDataControllerContact"].get("distributionOfResponsibilities")

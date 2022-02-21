@@ -3,7 +3,7 @@ name: Build and deploy to staging on push to branch
 on:
   push:
     branches:
-      - chore/hos/commonDataController-etl
+      - no
 
 jobs:
   build-and-deploy:
