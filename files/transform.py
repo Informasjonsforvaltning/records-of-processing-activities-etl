@@ -24,18 +24,21 @@ def openfile(file_name):
 
 def transform_record(old_dict):
     new_dict = {}
-    for key, value in old_dict.items():
-        checked = old_dict["commonDataControllerContact"].get("commonDataControllerChecked")
-        if checked and isinstance(checked, bool):
-            new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = checked
-        elif check_content(value):
-            new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = True
-        else:
-            new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = None
+    new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = get_checked_value(old_dict)
     new_dict["commonDataControllerContact"]["companies"] = old_dict["commonDataControllerContact"].get("companies")
     new_dict["commonDataControllerContact"]["distributionOfResponsibilities"] = old_dict["commonDataControllerContact"].get("distributionOfResponsibilities")
     new_dict["commonDataControllerContact"]["contactPoints"] = old_dict["commonDataControllerContact"].get("contactPoints")
     return new_dict
+
+
+def get_checked_value(old_dict):
+    checked = old_dict["commonDataControllerContact"].get("commonDataControllerChecked")
+    if checked and isinstance(checked, bool):
+        return checked
+    for key, value in old_dict.items():
+        if check_content(value):
+            return True
+    return None
 
 
 def check_content(content):
