@@ -13,6 +13,7 @@ def transform_records(r_file):
     print("Total number of extracted records: " + str(len(records)))
     for record_id in records:
         transformed_records[record_id] = transform_record(records[record_id])
+    print("Total number of transformed records: " + str(len(records)))
     return transformed_records
 
 
@@ -22,7 +23,7 @@ def openfile(file_name):
 
 
 def transform_record(old_dict):
-    new_dict = old_dict
+    new_dict = {}
     for key, value in old_dict.items():
         checked = old_dict["commonDataControllerContact"].get("commonDataControllerChecked")
         if checked and isinstance(checked, bool):
@@ -31,6 +32,9 @@ def transform_record(old_dict):
             new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = True
         else:
             new_dict["commonDataControllerContact"]["commonDataControllerChecked"] = None
+    new_dict["commonDataControllerContact"]["companies"] = old_dict["commonDataControllerContact"].get("companies")
+    new_dict["commonDataControllerContact"]["distributionOfResponsibilities"] = old_dict["commonDataControllerContact"].get("distributionOfResponsibilities")
+    new_dict["commonDataControllerContact"]["contactPoints"] = old_dict["commonDataControllerContact"].get("contactPoints")
     return new_dict
 
 
